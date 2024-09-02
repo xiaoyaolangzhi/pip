@@ -265,11 +265,11 @@ class Git(VersionControl):
         rev_display = rev_options.to_display()
         logger.info("Cloning %s%s to %s", url, rev_display, display_path(dest))
         if verbosity <= 0:
-            flags: Tuple[str, ...] = ("--quiet",)
+            flags: Tuple[str, ...] = ("--quiet", "--depth=1")
         elif verbosity == 1:
-            flags = ()
+            flags = ("--depth=1",)
         else:
-            flags = ("--verbose", "--progress")
+            flags = ("--verbose", "--progress", "--depth=1")
         if self.get_git_version() >= (2, 17):
             # Git added support for partial clone in 2.17
             # https://git-scm.com/docs/partial-clone
